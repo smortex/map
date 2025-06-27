@@ -67,7 +67,7 @@ function callback(data) {
 
     L.control.scale({maxWidth: 300}).addTo(map);
 
-    map.fitBounds(L.latLngBounds(members.map(e => e.getLatLng())));
+    map.fitWorld();
 }
 
 fetch("data.json")
