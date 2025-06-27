@@ -5,7 +5,7 @@ layout: default
 
 {{ site.description }}
 
-[Back to the map](/)
+[Back to the map]({{ site.url }})
 
 ## Manage my visibility
 

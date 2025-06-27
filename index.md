@@ -44,8 +44,8 @@ function callback(data) {
         popupAnchor:   [1, -34],
         tooltipAnchor: [16, -28],
         shadowSize:    [41, 41],
-        iconUrl:       'marker.png',
-        shadowUrl:     'marker-shadow.png',
+        iconUrl:       '{{ site.url }}/marker.png',
+        shadowUrl:     '{{ site.url }}/marker-shadow.png',
     });
 
     data.forEach(m => {
@@ -53,7 +53,7 @@ function callback(data) {
     });
 
     var common_attribution = 'Map data © <a href="https://www.openstreetmap.fr/">OpenStreetMap</a> | Tiles: ';
-    var map_instructions = ' | <a href="/about.html">About</a>';
+    var map_instructions = ' | <a href="{{ site.url }}/about.html">About</a>';
 
     var neighbourhood = L.tileLayer('https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey={{ site.thunderforest_apikey }}', {attribution: common_attribution + 'Neighbourhood © <a href="https://thunderforest.com/">Thunderforest</a>' + map_instructions});
 
@@ -70,7 +70,7 @@ function callback(data) {
     map.fitWorld();
 }
 
-fetch("data.json")
+fetch("{{ site.url }}/data.json")
   .then(response => {
     if (!response.ok) {
       throw new Error(response.statusText);
