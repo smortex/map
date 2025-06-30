@@ -1,6 +1,5 @@
 ---
 name: Remove me from the map
-description: Remove the user triggering the action from the map.
 run-name: 'Remove ${{ github.triggering_actor }} from the map'
 
 on:

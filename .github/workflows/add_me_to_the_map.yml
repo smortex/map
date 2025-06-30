@@ -1,6 +1,5 @@
 ---
 name: Add me to the map
-description: Add the user triggering the action to the map.  Use the location from the user's profile, unless a location is explicitely provided, unless latitude and longitude are provided.
 run-name: 'Add ${{ github.triggering_actor }} to the map'
 
 on:
