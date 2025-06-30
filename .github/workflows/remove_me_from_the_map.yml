@@ -1,5 +1,7 @@
 ---
 name: Remove me from the map
+description: Remove the user triggering the action from the map.
+run-name: 'Remove ${{ github.triggering_actor }} from the map'
 
 on:
   workflow_dispatch: {}
@@ -16,10 +18,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Remove location from map
+      - name: Remove user location
         run: |
          rm -f _data/${{ github.triggering_actor }}.json
-      - uses: ./.github/actions/aggregate-members-location
+      - name: Aggregate all users locations
+        uses: ./.github/actions/aggregate-members-location
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:

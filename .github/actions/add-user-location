@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'open-uri'
+
+if ARGV.count != 1
+  warn "usage: #{$0} username"
+  exit 1
+end
+
+def github_user_location(login)
+  URI.open("https://api.github.com/users/#{login}") do |f|
+    data = JSON.parse(f.read)
+    return data['location']
+  end
+end
+
+def location_coordinates(location)
+  p = URI::Parser.new
+  URI.open("https://api.geoapify.com/v1/geocode/search?text=#{p.escape(location)}&apiKey=#{ENV.fetch('GEOAPIFY_KEY')}") do |f|
+    data = JSON.parse(f.read)
+    return data.dig('features', 0, 'geometry', 'coordinates')
+  end
+end
+
+github_user = ARGV[0]
+
+lat = ENV.fetch('INPUT_LATITUDE', '')
+lng = ENV.fetch('INPUT_LONGITUDE', '')
+
+if lat.empty? || lng.empty?
+  location = ENV.fetch('INPUT_LOCATION', nil) || github_user_location(github_user)
+  raise "No location for geocoding" unless location
+
+  lng, lat = location_coordinates(location)
+end
+
+File.open("_data/#{github_user}.json", 'w') do |f|
+  f.puts({ login: github_user, lat: lat.to_f, lng: lng.to_f }.to_json)
+end
+
