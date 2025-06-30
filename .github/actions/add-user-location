@@ -29,7 +29,8 @@ lat = ENV.fetch('INPUT_LATITUDE', '')
 lng = ENV.fetch('INPUT_LONGITUDE', '')
 
 if lat.empty? || lng.empty?
-  location = ENV.fetch('INPUT_LOCATION', nil) || github_user_location(github_user)
+  location = ENV.fetch('INPUT_LOCATION', '')
+  location = github_user_location(github_user) if location.empty?
   raise "No location for geocoding" unless location
 
   lng, lat = location_coordinates(location)
