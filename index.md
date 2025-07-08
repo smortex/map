@@ -53,7 +53,7 @@ function callback(data) {
     });
 
     var common_attribution = 'Map data © <a href="https://www.openstreetmap.fr/">OpenStreetMap</a> | Tiles: ';
-    var map_instructions = ' | <a href="{{ site.url }}/about.html">About</a>';
+    var map_instructions = ' | <a href="{{ site.url }}/about.html">Manage your visibility on this map</a>';
 
     var neighbourhood = L.tileLayer('https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey={{ site.thunderforest_apikey }}', {attribution: common_attribution + 'Neighbourhood © <a href="https://thunderforest.com/">Thunderforest</a>' + map_instructions});
 
