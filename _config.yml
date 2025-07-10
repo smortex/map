@@ -17,3 +17,7 @@ exclude:
   - LICENSE
   - README.md
   - vendor
+
+collections:
+  about:
+    output: false
