@@ -34,3 +34,10 @@ Check `.github/actions/aggregate-members-location/action.yml` to see how it's do
 
 [Add me to the map]:https://github.com/{{ site.github_project }}/actions/workflows/add_me_to_the_map.yml
 [Remove me from the map]:https://github.com/{{ site.github_project }}/actions/workflows/remove_me_from_the_map.yml
+
+<div class="localcontext">
+  {% for about in site.about %}
+    {% if about.title %}<h2>{{ about.title }}</h2>{% endif %}
+    {{ about.content | markdownify }}
+  {% endfor %}
+</div>
