@@ -7,4 +7,4 @@ runs:
   - name: Aggregate members location
     shell: bash
     run: |
-      find _data -name \*.json | xargs cat | jq -s > data.json
+      find _data -name \*.json | sort | xargs cat | jq -s > data.json
