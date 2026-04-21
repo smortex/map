@@ -23,6 +23,27 @@ This will allow you to sync updates and fixes submitted upstream in your fork ea
 1. Collect and setup the required API keys (see bellow);
 1. Make sure your community members are allowed to trigger GitHub actions in your repository so that they can add their location to the map in self-service mode.
 
+### Adding local "about" context
+
+If you would like to add more information about your local instance, such as which
+github teams have write permissions to the repo or contact information for the admins,
+then create markdown files in the `_about` directory. The files must have front matter
+and if you specify a `title` attribute, then it will be displayed as a heading.
+
+```
+---
+title: This will be the heading
+---
+Put any markdown content you'd like here.
+It will render as expected.
+```
+
+```
+---
+---
+This option, with empty front matter, will use the filename as a heading.
+```
+
 ### Syncing your fork
 
 1. Synchronize the `main` branch of your fork with the upsteam repository;
