@@ -1,9 +1,14 @@
 ---
 name: Remove me from the map
-run-name: 'Remove ${{ github.triggering_actor }} from the map'
+run-name: 'Remove ${{ github.event.inputs.user || github.triggering_actor }} from the map'
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      user:
+        description: 'GitHub login of the user to remove from the map (yourself when empty)'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -19,10 +24,10 @@ jobs:
           ref: 'gh-pages'
       - name: Remove user location
         run: |
-         rm -f _data/${{ github.triggering_actor }}.json
+         rm -f _data/${{ github.event.inputs.user || github.triggering_actor }}.json
       - name: Aggregate all users locations
         uses: ./.github/actions/aggregate-members-location
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Remove ${{ github.triggering_actor }} from the map"
+          commit_message: "Remove ${{ github.event.inputs.user || github.triggering_actor }} from the map"

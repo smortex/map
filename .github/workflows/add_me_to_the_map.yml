@@ -1,10 +1,14 @@
 ---
 name: Add me to the map
-run-name: 'Add ${{ github.triggering_actor }} to the map'
+run-name: 'Add ${{ github.event.inputs.user || github.triggering_actor }} to the map'
 
 on:
   workflow_dispatch:
     inputs:
+      user:
+        description: 'GitHub login of the user to add to the map (yourself when empty)'
+        required: false
+        type: string
       location:
         description: 'Location / Address (read from user profile when empty)'
         required: false
@@ -32,7 +36,7 @@ jobs:
           ref: 'gh-pages'
       - name: Add user location
         run: |
-          ./.github/actions/add-user-location ${{ github.triggering_actor }}
+          ./.github/actions/add-user-location ${{ github.event.inputs.user || github.triggering_actor }}
         env:
           INPUT_LATITUDE: ${{ github.event.inputs.latitude }}
           INPUT_LONGITUDE: ${{ github.event.inputs.longitude }}
@@ -43,4 +47,4 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Add ${{ github.triggering_actor }} to the map"
+          commit_message: "Add ${{ github.event.inputs.user || github.triggering_actor }} to the map"
